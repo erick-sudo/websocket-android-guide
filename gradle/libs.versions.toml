@@ -9,7 +9,9 @@ lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
 composeBom = "2023.08.00"
 ktor = "2.3.11"
-coroutines = "1.8.0"
+gson = "2.10.1"
+retrofit = "2.9.0"
+ksp = "1.9.0-1.0.13"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,6 +28,9 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+
+# Navigation
+
 # Ktor dependencies
 #ktor-server-core = { group = "io.ktor", name = "ktor-server-core", version.ref = "ktor" }
 #ktor-server-netty = { group = "io.ktor", name = "ktor-server-netty", version.ref = "ktor" }
@@ -33,7 +38,14 @@ ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 
+# Gson (JSON parsing)
+google-code-gson = {module = "com.google.code.gson:gson", version.ref = "gson" }
+# Retrofit
+squareup-retrofit = { module ="com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+squareup-retrofit-converter-gson = { module="com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+googleDevtoolsKsp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
