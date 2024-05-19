@@ -1,5 +1,6 @@
 package com.whisper.websocketguide.repository
 
+import com.whisper.websocketguide.api.AccessTokenRequest
 import com.whisper.websocketguide.api.HiveAPI
 import com.whisper.websocketguide.models.CreateHiveConversation
 import com.whisper.websocketguide.models.CreateHiveMessage
@@ -9,11 +10,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class HiveRepository {
 
-    suspend fun createConversation(conversation: CreateHiveConversation) = API_INSTANCE.createNewConversation(conversation)
+    suspend fun login(credentials: AccessTokenRequest) = API_INSTANCE.login(credentials)
 
-    suspend fun fetchConversations() = API_INSTANCE.fetchConversations()
+    suspend fun fetchCurrentUser(authorization: String) = API_INSTANCE.fetchCurrentUser(authorization)
 
-    suspend fun createMessage(message: CreateHiveMessage) = API_INSTANCE.createMessage(message)
+    suspend fun createConversation(authorization: String, conversation: CreateHiveConversation) = API_INSTANCE.createNewConversation(authorization, conversation)
+
+    suspend fun fetchConversations(authorization: String) = API_INSTANCE.fetchConversations(authorization)
+
+    suspend fun createMessage(authorization: String, message: CreateHiveMessage) = API_INSTANCE.createMessage(authorization, message)
 
     companion object {
         private val API_INSTANCE: HiveAPI by lazy {

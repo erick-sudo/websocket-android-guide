@@ -61,6 +61,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
     // implementation(libs.ktor.server.core)
     // implementation(libs.ktor.server.netty)
     implementation(libs.ktor.client.core)
