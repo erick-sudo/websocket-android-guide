@@ -3,6 +3,7 @@ package com.whisper.websocketguide.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.whisper.websocketguide.api.AccessTokenResponse
 import com.whisper.websocketguide.api.ApiCallWrapper
 import com.whisper.websocketguide.models.HiveConversation
 import com.whisper.websocketguide.repository.HiveRepository
@@ -19,14 +20,13 @@ class ConversationsViewModel: ViewModel() {
     val conversationsFlow
         get() = _conversationsFlow.asStateFlow()
 
-    init {
+    suspend fun fetchConversations(accessTokenResponse: AccessTokenResponse) {
         viewModelScope.launch {
             ApiCallWrapper.call(
                 apiCall = {
-                    hiveRepository.fetchConversations("")
+                    hiveRepository.fetchConversations("Bearer ${accessTokenResponse.accessToken}")
                 }
             ) { errorLevel, code, responseBody, exceptionMessage ->
-                val responseMessage: String = responseBody?.toString() ?: ""
                 Log.d("API_ERROR", "ERROR_LEVEL $errorLevel, STATUS_CODE: $code, RESPONSE_BODY: $responseBody, ERROR_MESSAGE: $exceptionMessage")
             }?.let { conversations ->
                 _conversationsFlow.value = conversations

@@ -2,39 +2,44 @@ package com.whisper.websocketguide.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.whisper.websocketguide.api.AccessTokenRequest
+import com.whisper.websocketguide.api.AccessTokenResponse
 import com.whisper.websocketguide.api.ApiCallWrapper
-import com.whisper.websocketguide.models.HiveConversation
-import com.whisper.websocketguide.models.HiveCurrentUser
+import com.whisper.websocketguide.models.LoginUIState
 import com.whisper.websocketguide.repository.HiveRepository
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 class AuthViewModel: ViewModel() {
     private val hiveRepository = HiveRepository()
 
-    private var _currentUserFlow = MutableSharedFlow<HiveCurrentUser>()
+    private var _loginUIStateFlow = MutableStateFlow(LoginUIState())
 
-    val currentUserFlow
-        get() = _currentUserFlow.asSharedFlow()
+    val loginUIStateFlow
+        get() = _loginUIStateFlow.asStateFlow()
 
-    init {
-        viewModelScope.launch {
-            ApiCallWrapper.call(
-                apiCall = {
-                    hiveRepository.login(AccessTokenRequest("erick", "password"))
-                }
-            ) { errorLevel, code, responseBody, exceptionMessage ->
-                val responseMessage: String = responseBody?.toString() ?: ""
-                Log.d("API_ERROR", "ERROR_LEVEL $errorLevel, STATUS_CODE: $code, RESPONSE_BODY: $responseBody, ERROR_MESSAGE: $exceptionMessage")
-            }?.let { user ->
-
-                Log.d("API-RESPONSE", user.toString())
+    private suspend fun fetchCurrentUser(accessTokenResponse: AccessTokenResponse) {
+        ApiCallWrapper.call(
+            apiCall = {
+                hiveRepository.fetchCurrentUser("Bearer ${accessTokenResponse.accessToken}")
             }
+        ) { errorLevel, code, responseBody, exceptionMessage ->
+            Log.d("API_ERROR", "ERROR_LEVEL $errorLevel, STATUS_CODE: $code, RESPONSE_BODY: $responseBody, ERROR_MESSAGE: $exceptionMessage")
+        }?.let { user ->
+            _loginUIStateFlow.value = _loginUIStateFlow.value.copy(currentUser = user)
+        }
+    }
+
+    suspend fun login(accessTokenRequest: AccessTokenRequest) {
+        ApiCallWrapper.call(
+            apiCall = {
+                hiveRepository.login(accessTokenRequest)
+            }
+        ) { errorLevel, code, responseBody, exceptionMessage ->
+            Log.d("API_ERROR", "ERROR_LEVEL $errorLevel, STATUS_CODE: $code, RESPONSE_BODY: $responseBody, ERROR_MESSAGE: $exceptionMessage")
+        }?.let { accessToken ->
+            _loginUIStateFlow.value = _loginUIStateFlow.value.copy(accessToken = accessToken)
+            fetchCurrentUser(accessToken)
         }
     }
 }

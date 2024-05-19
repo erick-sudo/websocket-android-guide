@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.navigation.compose)
 
     // implementation(libs.ktor.server.core)
     // implementation(libs.ktor.server.netty)

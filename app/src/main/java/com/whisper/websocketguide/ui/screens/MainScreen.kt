@@ -8,5 +8,5 @@ import com.whisper.websocketguide.viewmodels.AuthViewModel
 fun MainScreen(
     authViewModel: AuthViewModel = viewModel()
 ) {
-
+    HiveNavHost(authViewModel = authViewModel)
 }
