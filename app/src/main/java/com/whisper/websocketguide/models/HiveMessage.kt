@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName
 import java.util.Date
 
 data class HiveMessage(
-    @SerializedName("id") val id: Int,
+    @SerializedName("id") var id: Int,
     @SerializedName("text") var text: String,
-    @SerializedName("viewed") val viewed: Boolean,
+    @SerializedName("viewed") var viewed: Boolean,
     @SerializedName("created_at") var createdAt: Date,
-    @SerializedName("conversation_id") val conversationId: Int,
-    @SerializedName("user_id") val userId: Int
+    @SerializedName("conversation_id") var conversationId: Int,
+    @SerializedName("user_id") var userId: Int
 )

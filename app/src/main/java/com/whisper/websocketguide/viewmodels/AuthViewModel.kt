@@ -30,8 +30,8 @@ class AuthViewModel: ViewModel() {
         }
     }
 
-    suspend fun login(accessTokenRequest: AccessTokenRequest) {
-        ApiCallWrapper.call(
+    suspend fun login(accessTokenRequest: AccessTokenRequest): AccessTokenResponse? {
+        return ApiCallWrapper.call(
             apiCall = {
                 hiveRepository.login(accessTokenRequest)
             }
@@ -40,6 +40,7 @@ class AuthViewModel: ViewModel() {
         }?.let { accessToken ->
             _loginUIStateFlow.value = _loginUIStateFlow.value.copy(accessToken = accessToken)
             fetchCurrentUser(accessToken)
+            accessToken
         }
     }
 }

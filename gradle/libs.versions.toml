@@ -14,6 +14,7 @@ retrofit = "2.9.0"
 ksp = "1.9.0-1.0.13"
 lifecycleViewmodelCompose = "2.8.0"
 navigationCompose = "2.7.7"
+room = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -31,16 +32,21 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
-androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
 # Navigation
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+
+# Room
+#room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+#room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 
 # Ktor dependencies
 #ktor-server-core = { group = "io.ktor", name = "ktor-server-core", version.ref = "ktor" }
 #ktor-server-netty = { group = "io.ktor", name = "ktor-server-netty", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
-ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+#ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-serialization-gson = { module = "io.ktor:ktor-serialization-gson", version.ref = "ktor" }
 
 # Gson (JSON parsing)
 google-code-gson = {module = "com.google.code.gson:gson", version.ref = "gson" }

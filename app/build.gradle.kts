@@ -64,10 +64,14 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
 
+//    implementation(libs.room.compiler)
+//    implementation(libs.room.ktx)
+
     // implementation(libs.ktor.server.core)
     // implementation(libs.ktor.server.netty)
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.okhttp)
+    implementation(libs.ktor.serialization.gson)
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.retrofit.converter.gson)
     implementation(libs.google.code.gson)

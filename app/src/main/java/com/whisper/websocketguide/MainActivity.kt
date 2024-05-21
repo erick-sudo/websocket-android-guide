@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import com.whisper.websocketguide.ui.screens.ConversationListings
 import com.whisper.websocketguide.ui.screens.MainScreen
 import com.whisper.websocketguide.ui.theme.WebsocketGuideTheme
 
